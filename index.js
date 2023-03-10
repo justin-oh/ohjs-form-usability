@@ -55,40 +55,10 @@ export function connectLabels(form) {
     });
 }
 
-/**
- * Makes all select[type=multiple] fields in the form
- * usable like a group of checkboxes.
- *
- * @param {HTMLFormElement} form
- */
-export function improveSelectMultiple(select) {
-    if (!isInstanceOf(select, HTMLSelectElement)) {
-        throw '`select` must be an HTMLSelectElement';
-    }
-
-    if (!select.multiple) {
-        throw '`select` must be flagged as multiple';
-    }
-
-    select.querySelectorAll('option').forEach((option) => {
-        option.addEventListener('mousedown', function(e) {
-            e.preventDefault();
-
-            this.selected = !this.selected;
-
-            return false;
-        });
-    });
-}
-
 export default function(form) {
     if (!isInstanceOf(form, HTMLFormElement)) {
         throw '`form` must be an HTMLFormElement';
     }
 
     connectLabels(form);
-
-    form.querySelectorAll('select[multiple]').forEach((select) => {
-        improveSelectMultiple(select);
-    });
 }
